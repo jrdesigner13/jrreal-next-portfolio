@@ -26,7 +26,6 @@ export async function generateMetadata({
   const page = await client
     .getByUID("project", params.uid)
     .catch(() => notFound());
-
   return {
     title: page.data.title,
     description: page.data.meta_description,

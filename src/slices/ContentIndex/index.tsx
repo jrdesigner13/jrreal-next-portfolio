@@ -17,8 +17,16 @@ const BlogPostIndex = async ({
   slice,
 }: BlogPostIndexProps): Promise<JSX.Element> => {
   const client = createClient();
-  const blogPosts = await client.getAllByType("blog_post");
-  const projects = await client.getAllByType("project");
+  const blogPosts = await client.getAllByType("blog_post", { orderings: [
+    {
+      field:  "my.blog_post.date",
+      direction: 'desc',
+    },]});
+  const projects = await client.getAllByType("project", { orderings: [
+    {
+      field:  "my.project.date",
+      direction: 'desc',
+    },]});
 
   const items = slice.primary.content_type === "Blog" ? blogPosts : projects;
 
